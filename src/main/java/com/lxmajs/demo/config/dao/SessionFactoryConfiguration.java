@@ -31,8 +31,7 @@ public class SessionFactoryConfiguration {
     @Bean(name = "sqlSessionFactory")
     public SqlSessionFactoryBean createSqlSessionFactoryBean() throws IOException {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-
-        // 
+        
         sqlSessionFactoryBean.setConfigLocation(new ClassPathResource(mybatisConfigFilePath));
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         String packageSearchPath = PathMatchingResourcePatternResolver.CLASSPATH_URL_PREFIX + mapperPath;
