@@ -7,3 +7,7 @@ jdbc:
   url: jdbc:mysql://127.0.0.1:3306/library?useUnicode=true&characterEncoding=utf8&useSSL=false
   username: root
   password: shabi
+
+mybatis_config_file: mybatis-config.xml
+mapper_path: /mapper/**.xml
+entity_package: com.lxmajs.demo.entity
