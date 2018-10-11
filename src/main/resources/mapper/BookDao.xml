@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lxmajs.demo.dao.BookDao">
+
+    <select id="queryBook" resultType="com.lxmajs.demo.entity.Book">
+        SELECT id, title, price, create_time
+        FROM books
+        ORDER BY id
+        DESC
+    </select>
+
+    <select id="queryBookById" resultType="com.lxmajs.demo.entity.Book">
+        SELECT id, title, price, create_time
+        FROM books
+        WHERE id = #{bookId}
+    </select>
+
+    <insert id="insertBook" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.lxmajs.demo.entity.Book">
+        INSERT INTO books(title, price, create_time)
+        VALUES (#{title}, #{price}, #{createTime})
+    </insert>
+
+    <update id="updateBook" parameterType="com.lxmajs.demo.entity.Book">
+        UPDATE books
+        <set>
+            <if test="title!=null">title=#{title},</if>
+            <if test="price!=null">price=#{price}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteBook">
+      DELETE FROM books
+      WHERE id = #{id}
+    </delete>
+
+</mapper>

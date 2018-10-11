@@ -11,34 +11,34 @@ public interface BookDao {
      *
      * @return
      */
-    List<Book> query();
+    List<Book> queryBook();
 
     /**
      *
      * @param bookId
      * @return
      */
-    Book queryById(int bookId);
+    Book queryBookById(int bookId);
 
     /**
      *
      * @param book
      * @return
      */
-    int insert(Book book);
+    int insertBook(Book book);
 
     /**
      *
      * @param book
      * @return
      */
-    int update(Book book);
+    int updateBook(Book book);
 
     /**
      *
      * @param bookId
      * @return
      */
-    int delete(int bookId);
+    int deleteBook(int bookId);
 
 }
