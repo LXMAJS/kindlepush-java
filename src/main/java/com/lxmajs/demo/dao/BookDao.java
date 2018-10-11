@@ -4,6 +4,7 @@ import com.lxmajs.demo.entity.Book;
 
 import java.util.List;
 
+
 public interface BookDao {
 
     /**
@@ -34,7 +35,7 @@ public interface BookDao {
     int update(Book book);
 
     /**
-     * 
+     *
      * @param bookId
      * @return
      */
