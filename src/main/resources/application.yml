@@ -1,6 +1,6 @@
 server:
   port: 8082
-  context-path: /hello
+  context-path: /library
 
 jdbc:
   driver: com.mysql.jdbc.Driver
