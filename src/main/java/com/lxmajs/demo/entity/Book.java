@@ -36,6 +36,14 @@ public class Book {
         this.createTime = createTime;
     }
 
+    public Date getLastEditTime() {
+        return lastEditTime;
+    }
+
+    public void setLastEditTime(Date lastEditTime) {
+        this.lastEditTime = lastEditTime;
+    }
+
     /**
      *
      */
@@ -55,4 +63,9 @@ public class Book {
      *
      */
     private Date createTime;
+
+    /**
+     *
+     */
+    private Date lastEditTime;
 }
