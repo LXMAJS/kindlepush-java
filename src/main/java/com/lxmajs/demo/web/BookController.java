@@ -74,7 +74,7 @@ public class BookController {
      * @param bookId
      * @return
      */
-    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
     private Map<String, Object> deleteBook(Integer bookId){
         Map<String, Object> modelMap = new HashMap<String, Object>();
         modelMap.put("success", bookService.deleteBook(bookId));
