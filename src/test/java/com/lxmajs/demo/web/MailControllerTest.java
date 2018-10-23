@@ -17,9 +17,11 @@ public class MailControllerTest {
     @Resource
     private MailService mailService;
 
+    private String to = "lxmajs@163.com";
+
     @Test
     public void sendMailTest(){
-        mailService.sendSimpleMail("lxmajs@163.com", "hello world", "没什么事，就是发一个邮件");
+        mailService.sendSimpleMail(to, "hello world", "没什么事，就是发一个邮件");
     }
 
     @Test
@@ -29,6 +31,18 @@ public class MailControllerTest {
                         "<h3>这是一个html的邮件的内容</h3>" +
                     "</body>" +
                 "</html>";
-        mailService.sendHtmlMail("lxmajs@163.com", "这是一封html邮件", content);
+        mailService.sendHtmlMail(to, "这是一封html邮件", content);
+    }
+
+    @Test
+    public void sendAttachmentMailTest() throws MessagingException {
+        String content = "<html>"+
+                "<body>" +
+                "<h3>这是一个带有附件的邮件</h3>" +
+                "</body>" +
+                "</html>";
+        String filePath = "/library/README.md";
+        mailService.sendAttachmentMail(to, "这是一封html邮件", content, filePath);
+
     }
 }

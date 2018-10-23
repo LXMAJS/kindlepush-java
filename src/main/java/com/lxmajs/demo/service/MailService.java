@@ -2,6 +2,7 @@ package com.lxmajs.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.io.File;
 
 @Service
 public class MailService {
@@ -59,5 +61,42 @@ public class MailService {
         helper.setFrom(from);
 
         mailSender.send(message);
+    }
+
+
+    /**
+     * 发送带一个附件的邮件
+     * @param to
+     * @param subject
+     * @param content
+     * @param filePath
+     * @throws MessagingException
+     */
+    public void sendAttachmentMail(String to, String subject, String content, String filePath) throws MessagingException {
+        MimeMessage message = mailSender.createMimeMessage();
+
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(content, true);
+        helper.setFrom(from);
+
+        FileSystemResource file = new FileSystemResource(new File(filePath));
+        String fileName = file.getFilename();
+        helper.addAttachment(fileName, file);
+
+        mailSender.send(message);
+    }
+
+    /**
+     * 发送很多附件的邮件
+     * @param to
+     * @param subject
+     * @param content
+     * @param filePath
+     * @throws MessagingException
+     */
+    public void sendAttachmentsMail(String to, String subject, String content, String filePath) throws MessagingException {
+
     }
 }
