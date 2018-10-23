@@ -80,4 +80,19 @@ public class BookController {
         modelMap.put("success", bookService.deleteBook(bookId));
         return modelMap;
     }
+
+    /**
+     *
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        double num = 0;
+        int[] numArray = new int[nums1.length + nums2.length];
+
+
+
+        return num;
+    }
 }

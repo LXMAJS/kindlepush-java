@@ -11,3 +11,11 @@ jdbc:
 mybatis_config_file: mybatis-config.xml
 mapper_path: /mapper/**.xml
 entity_package: com.lxmajs.demo.entity
+
+spring:
+  mail:
+    host: smtp.qq.com
+    username: 254695943@qq.com
+    password: eokprudgqvhbcafb
+    default-encoding: utf-8
+
