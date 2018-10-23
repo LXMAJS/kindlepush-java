@@ -4,7 +4,6 @@ package com.lxmajs.demo.web;
 import com.lxmajs.demo.service.MailService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -14,7 +13,7 @@ import javax.annotation.Resource;
 @SpringBootTest
 public class MailControllerTest {
 
-    @Autowired
+    @Resource
     private MailService mailService;
 
     @Test
