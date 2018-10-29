@@ -61,7 +61,7 @@ public class MailControllerTest {
                 "</body>" +
                 "</html>";
         String filePath = "/Users/lijin/Documents/Document/R0000025.DNG";
-        mailService.sendInLinResourceMail(to, "这是一封html邮件", content, filePath, "001");
+        mailService.sendInlineResourceMail(to, "这是一封html邮件", content, filePath, "001");
     }
 
 

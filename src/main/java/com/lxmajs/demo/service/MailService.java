@@ -1,5 +1,7 @@
 package com.lxmajs.demo.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
@@ -27,6 +29,11 @@ public class MailService {
      */
     @Autowired
     private JavaMailSender mailSender;
+
+    /**
+     * 日志记录
+     */
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * 发送简单邮件
@@ -126,17 +133,25 @@ public class MailService {
      * @param rscPath
      * @param rscPath
      */
-    public void sendInLinResourceMail(String to, String subject, String content, String rscPath, String rscId) throws MessagingException {
+    public void sendInlineResourceMail(String to, String subject, String content, String rscPath, String rscId) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = null;
 
-        MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        helper.setTo(to);
-        helper.setSubject(subject);
-        helper.setText(content, true);
-        helper.setFrom(from);
+        logger.info("尝试发送模板邮件：{}, {}, {}, {}, {}", from, to, subject, content, rscId);
+        try {
+            helper = new MimeMessageHelper(message, true);
+            helper.setTo(to);
+            helper.setSubject(subject);
+            helper.setText(content, true);
+            helper.setFrom(from);
 
-        FileSystemResource file = new FileSystemResource(new File(rscPath));
-        helper.addInline(rscId, file);
-        mailSender.send(message);
+            FileSystemResource file = new FileSystemResource(new File(rscPath));
+            helper.addInline(rscId, file);
+            mailSender.send(message);
+
+            logger.info("邮件发送成功");
+        } catch (Exception e) {
+            logger.error("发送模板邮件异常：" + e.getMessage());
+        }
     }
 }
