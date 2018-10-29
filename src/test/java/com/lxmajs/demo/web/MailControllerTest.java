@@ -41,8 +41,21 @@ public class MailControllerTest {
                 "<h3>这是一个带有附件的邮件</h3>" +
                 "</body>" +
                 "</html>";
-        String filePath = "/library/README.md";
+        String filePath = "/Users/lijin/Documents/Document/R0000025.DNG";
         mailService.sendAttachmentMail(to, "这是一封html邮件", content, filePath);
+
+    }
+
+    @Test
+    public void sendInLinResourceMailTest() throws MessagingException {
+        String content = "<html>"+
+                "<body>" +
+                "<h3>这是一个带有附件的邮件</h3>" +
+                "<img src=\'cid:\"001\"\' />" +
+                "</body>" +
+                "</html>";
+        String filePath = "/Users/lijin/Documents/Document/R0000025.DNG";
+        mailService.sendInLinResourceMail(to, "这是一封html邮件", content, filePath, "001");
 
     }
 }
