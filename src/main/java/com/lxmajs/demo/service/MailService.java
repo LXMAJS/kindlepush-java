@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
+import java.util.List;
 
 @Service
 public class MailService {
@@ -93,10 +94,49 @@ public class MailService {
      * @param to
      * @param subject
      * @param content
-     * @param filePath
+     * @param filePaths
      * @throws MessagingException
      */
-    public void sendAttachmentsMail(String to, String subject, String content, String filePath) throws MessagingException {
+    public void sendAttachmentsMail(String to, String subject, String content, List<String> filePaths) throws MessagingException {
+        MimeMessage message = mailSender.createMimeMessage();
 
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(content, true);
+        helper.setFrom(from);
+
+
+        if(filePaths.size() > 0) {
+            for (int i = 0; i > filePaths.size(); i ++) {
+                FileSystemResource file = new FileSystemResource(new File(filePaths.get(i)));
+                String fileName = file.getFilename();
+                helper.addAttachment(fileName, file);
+            }
+        }
+
+        mailSender.send(message);
+    }
+
+    /**
+     *
+     * @param to
+     * @param subject
+     * @param content
+     * @param rscPath
+     * @param rscPath
+     */
+    public void sendInLinResourceMail(String to, String subject, String content, String rscPath, String rscId) throws MessagingException {
+        MimeMessage message = mailSender.createMimeMessage();
+
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(content, true);
+        helper.setFrom(from);
+
+        FileSystemResource file = new FileSystemResource(new File(rscPath));
+        helper.addInline(rscId, file);
+        mailSender.send(message);
     }
 }
