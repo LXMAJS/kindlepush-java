@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8"/>
+    <title>邮件模板</title>
+</head>
+<body>
+    你好，感谢您的注册，这是一封注册邮件，请点击下方链接，完成注册，感谢您的支持！
+    <br/>
+    <a href="#" th:href="@{https://www.cnblogs.com/lxmajs/p/{id}(id=${id})}">激活账户</a>
+</body>
+</html>

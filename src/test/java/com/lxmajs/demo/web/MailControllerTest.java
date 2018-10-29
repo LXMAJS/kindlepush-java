@@ -6,9 +6,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
+import java.util.Hashtable;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -16,6 +19,9 @@ public class MailControllerTest {
 
     @Resource
     private MailService mailService;
+
+    @Resource
+    private TemplateEngine templateEngine;
 
     private String to = "lxmajs@163.com";
 
@@ -56,6 +62,15 @@ public class MailControllerTest {
                 "</html>";
         String filePath = "/Users/lijin/Documents/Document/R0000025.DNG";
         mailService.sendInLinResourceMail(to, "这是一封html邮件", content, filePath, "001");
+    }
 
+
+    @Test
+    public void sendTemplateMail() throws MessagingException {
+        Context context = new Context();
+        context.setVariable("id", "8886562");
+
+        String emailContent = templateEngine.process("emailTemplate", context);
+        mailService.sendHtmlMail(to, "这是一封模板邮件", emailContent);
     }
 }
