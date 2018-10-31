@@ -14,6 +14,18 @@ public class JsonResult {
     private Integer status;
 
     /**
+     * 状态码枚举
+     */
+    public enum EStatus{
+        Success(200), Error(500), Error_Bean(501), Error_Token(502), Error_Other(555);
+
+        private int code;
+
+        private EStatus(int code){
+            this.code = code;
+        }
+    }
+    /**
      *
      */
     private String msg;
@@ -78,7 +90,7 @@ public class JsonResult {
      * @return
      */
     public static JsonResult ok(Object data){
-        return new JsonResult(JsonResultStatus.Success, null, data);
+        return new JsonResult(EStatus.Success.code, null, data);
     }
 
     /**
