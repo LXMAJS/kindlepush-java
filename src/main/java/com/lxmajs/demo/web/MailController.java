@@ -1,5 +1,6 @@
 package com.lxmajs.demo.web;
 
+import com.lxmajs.demo.model.JsonResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,5 +23,10 @@ public class MailController {
 
 
         return modelMap;
+    }
+
+    @RequestMapping(value = "get", method = RequestMethod.GET)
+    private JsonResult get(String content){
+        return JsonResult.ok();
     }
 }
