@@ -1,7 +1,5 @@
 package com.lxmajs.demo.model;
 
-import com.lxmajs.demo.util.JsonResultStatus;
-
 /**
  * @author lxmajs
  * @title json对象的返回
@@ -17,7 +15,11 @@ public class JsonResult {
      * 状态码枚举
      */
     public enum EStatus{
-        Success(200), Error(500), Error_Bean(501), Error_Token(502), Error_Other(555);
+        Success(200),
+        Error(500),
+        Error_Bean(501),
+        Error_Token(502),
+        Error_Other(555);
 
         private int code;
 
@@ -25,6 +27,7 @@ public class JsonResult {
             this.code = code;
         }
     }
+
     /**
      *
      */
@@ -98,7 +101,7 @@ public class JsonResult {
      * @return
      */
     public static JsonResult ok(){
-        return new JsonResult(JsonResultStatus.Success, null, null);
+        return new JsonResult(EStatus.Success.code, null, null);
     }
 
     /**
@@ -107,7 +110,7 @@ public class JsonResult {
      * @return
      */
     public static JsonResult error(String msg){
-        return new JsonResult(JsonResultStatus.Error, msg, null);
+        return new JsonResult(EStatus.Error.code, msg, null);
     }
 
     /**
@@ -116,7 +119,7 @@ public class JsonResult {
      * @return
      */
     public static JsonResult errorMap(Object data){
-        return new JsonResult(JsonResultStatus.Error_Bean, "error", data);
+        return new JsonResult(EStatus.Error_Bean.code, "error", data);
     }
 
     /**
@@ -125,7 +128,7 @@ public class JsonResult {
      * @return
      */
     public static JsonResult errorToken(String msg){
-        return new JsonResult(JsonResultStatus.Error_Token, msg, null);
+        return new JsonResult(EStatus.Error_Token.code, msg, null);
     }
 
     /**
@@ -134,7 +137,7 @@ public class JsonResult {
      * @return
      */
     public static JsonResult errorException(String msg){
-        return new JsonResult(JsonResultStatus.Error_Other, msg, null);
+        return new JsonResult(EStatus.Error_Other.code, msg, null);
     }
 
     /**
@@ -142,6 +145,6 @@ public class JsonResult {
      * @return
      */
     public boolean isOk(){
-        return this.status == JsonResultStatus.Success;
+        return this.status == EStatus.Success.code;
     }
 }
