@@ -1,6 +1,7 @@
 package com.lxmajs.demo.web;
 
 import com.lxmajs.demo.entity.Book;
+import com.lxmajs.demo.model.JsonResult;
 import com.lxmajs.demo.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,16 +21,13 @@ public class BookController {
     private BookService bookService;
 
     /**
-     * 获得所有的书籍列表，此处未分页
+     * 获得所有的书籍列表，此处未分
      * @return
      */
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    private Map<String, Object> bookList(){
-        Map<String, Object> modelMap = new HashMap<String, Object>();
+    private JsonResult bookList(){
         List<Book> list = bookService.getBookList();
-
-        modelMap.put("bookList", list);
-        return modelMap;
+        return JsonResult.ok(list);
     }
 
     /**
@@ -38,12 +36,9 @@ public class BookController {
      * @return
      */
     @RequestMapping(value = "getbyid", method = RequestMethod.GET)
-    private Map<String, Object> getById(Integer bookId){
-        Map<String, Object> modelMap = new HashMap<String, Object>();
+    private JsonResult getById(Integer bookId){
         Book book = bookService.getBookById(bookId);
-
-        modelMap.put("bookInfo", book);
-        return modelMap;
+        return JsonResult.ok(book);
     }
 
     /**
@@ -51,10 +46,12 @@ public class BookController {
      * @return
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    private Map<String, Object> addBook(@RequestBody Book book){
-        Map<String, Object> modelMap = new HashMap<String, Object>();
-        modelMap.put("success", bookService.addBook(book));
-        return modelMap;
+    private JsonResult addBook(@RequestBody Book book){
+        boolean success = bookService.addBook(book);
+        if (success)
+            return JsonResult.ok();
+        else
+            return JsonResult.error("添加书籍失败");
     }
 
     /**
@@ -63,10 +60,12 @@ public class BookController {
      * @return
      */
     @RequestMapping(value = "modify", method = RequestMethod.POST)
-    private Map<String, Object> modifyBook(@RequestBody Book book){
-        Map<String, Object> modelMap = new HashMap<String, Object>();
-        modelMap.put("success", bookService.modifyBook(book));
-        return modelMap;
+    private JsonResult modifyBook(@RequestBody Book book){
+        boolean success = bookService.modifyBook(book);
+        if (success)
+            return JsonResult.ok();
+        else
+            return JsonResult.error("书籍更新失败");
     }
 
     /**
@@ -75,10 +74,12 @@ public class BookController {
      * @return
      */
     @RequestMapping(value = "delete", method = RequestMethod.GET)
-    private Map<String, Object> deleteBook(Integer bookId){
-        Map<String, Object> modelMap = new HashMap<String, Object>();
-        modelMap.put("success", bookService.deleteBook(bookId));
-        return modelMap;
+    private JsonResult deleteBook(Integer bookId) {
+        boolean success = bookService.deleteBook(bookId);
+        if (success)
+            return JsonResult.ok();
+        else
+            return JsonResult.error("书籍删除失败");
     }
 
     /**
