@@ -1,5 +1,8 @@
 package com.lxmajs.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.Date;
 
 public class Book {
@@ -57,15 +60,18 @@ public class Book {
     /**
      *
      */
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Float price;
 
     /**
      *
      */
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss a", locale = "zh", timezone = "GMT-8")
     private Date createTime;
 
     /**
      *
      */
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss a", locale = "zh", timezone = "GMT-8")
     private Date lastEditTime;
 }

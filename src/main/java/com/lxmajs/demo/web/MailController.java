@@ -13,20 +13,15 @@ import java.util.Map;
 @RequestMapping("/mail")
 public class MailController {
     /**
-     * 发送一个邮件
+     * 发送一封邮件
+     * @param userId
+     * @param to
+     * @param subject
      * @param content
      * @return
      */
     @RequestMapping(value = "send", method = RequestMethod.GET)
-    private Map<String, Object> sendMail(String content){
-        Map<String, Object> modelMap = new HashMap<String, Object>();
-
-
-        return modelMap;
-    }
-
-    @RequestMapping(value = "get", method = RequestMethod.GET)
-    private JsonResult get(String content){
+    private JsonResult send(String userId, String to, String subject, String content){
         return JsonResult.ok();
     }
 }

@@ -70,7 +70,7 @@ public class JsonResult {
      * @param msg
      * @param data
      */
-    public JsonResult(Integer status, String msg, Object data) {
+    public JsonResult(Integer status, String msg, Object  data) {
         this.status = status;
         this.msg = msg;
         this.data = data;
