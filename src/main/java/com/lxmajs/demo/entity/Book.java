@@ -60,7 +60,7 @@ public class Book {
     /**
      *
      */
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_NULL )
     private Float price;
 
     /**

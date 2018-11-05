@@ -19,3 +19,14 @@ spring:
     password: eokprudgqvhbcafb
     default-encoding: utf-8
 
+  redis:
+    database: 1
+    host: 192.168.1.191
+    port: 6379
+    pool:
+      max-active: 1000
+      max-wait: -1
+      min-idle: 2
+      max-idle: 10
+    timeout: 0
+
