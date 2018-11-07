@@ -142,6 +142,45 @@ public class RedisOperator {
         return redisTemplate.opsForHash().entries(key);
     }
 
-    
+    /**
+     * ------------
+     * 列表
+     * ------------
+     */
 
+    /**
+     * 实现命令：LPUSH key value，将一个值 value插入到列表 key的表头
+     * @param key
+     * @param value
+     */
+    public void lpush(String key, String value){
+        redisTemplate.opsForList().leftPush(key, value);
+    }
+
+    /**
+     * 实现命令：RPUSH key value，将一个值 value插入到列表 key的表尾(最右边)。
+     * @param key
+     * @param val
+     */
+    public void rpush(String key, String val){
+        redisTemplate.opsForList().rightPush(key, val);
+    }
+
+    /**
+     * 实现命令：LPOP key，移除并返回列表 key的头元素。
+     * @param key
+     * @return
+     */
+    public String lpop(String key){
+        return redisTemplate.opsForList().leftPop(key);
+    }
+
+    /**
+     * 实现命令：RPOP key，移除并返回列表 key的尾元素。
+     * @param key
+     * @return
+     */
+    public String rpop(String key){
+        return redisTemplate.opsForList().rightPop(key);
+    }
 }
