@@ -172,7 +172,7 @@ public class RedisOperator {
      * @return
      */
     public String lpop(String key){
-        return redisTemplate.opsForList().leftPop(key);
+        return (String)redisTemplate.opsForList().leftPop(key);
     }
 
     /**
@@ -181,6 +181,6 @@ public class RedisOperator {
      * @return
      */
     public String rpop(String key){
-        return redisTemplate.opsForList().rightPop(key);
+        return (String)redisTemplate.opsForList().rightPop(key);
     }
 }
