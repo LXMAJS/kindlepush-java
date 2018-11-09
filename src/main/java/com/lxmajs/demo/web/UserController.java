@@ -31,6 +31,9 @@ public class UserController {
         modelMap.put("code", code);
 
         String url = "https://api.weixin.qq.com/sns/jscode2session";
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("appId", "");
+
 
         // 发起远程请求微信付武器的接口，获取登录的sessionkey
         String wxResult = "";
