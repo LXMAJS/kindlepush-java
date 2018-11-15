@@ -19,6 +19,13 @@ public interface AdministratorService {
     Administrator getAdministratorById(int administratorId);
 
     /**
+     * 根据用户名获得单个管理员的信息
+     * @param administratorUsername
+     * @return
+     */
+    Administrator getAdministratorByUsername(String administratorUsername);
+
+    /**
      * 添加管理员
      * @param administrator
      * @return

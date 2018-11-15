@@ -88,4 +88,23 @@ public class Administrator {
      */
     @JsonIgnore
     private int roleType;
+
+    /**
+     * 常用枚举
+     */
+    public static enum ERoleType{
+        DefaultRolt (0),
+        SuperAdmin (1),
+        Admin (2);
+
+        public int getCode() {
+            return code;
+        }
+
+        private int code;
+
+        ERoleType(int code){
+            this.code = code;
+        }
+    }
 }

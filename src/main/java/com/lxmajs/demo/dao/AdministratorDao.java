@@ -21,6 +21,13 @@ public interface AdministratorDao {
     Administrator queryAdministratorById(int id);
 
     /**
+     * 根据用户名获得某个用户的信息
+     * @param username
+     * @return
+     */
+    Administrator queryAdministratorByUsername(String username);
+
+    /**
      *
      * @param admin
      * @return

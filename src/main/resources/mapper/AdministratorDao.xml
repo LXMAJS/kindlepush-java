@@ -18,6 +18,12 @@
         WHERE id = #{administratorId}
     </select>
 
+    <select id="queryAdministratorByUsername" resultType="com.lxmajs.demo.entity.Administrator">
+        SELECT id, username, nickname, password, create_time, role_type
+        FROM administrator
+        WHERE username = #{username}
+    </select>
+
     <insert id="insertAdministrator" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.lxmajs.demo.entity.Administrator">
         INSERT INTO books(username, nickname, password, create_time, role_type)
         VALUES (#{username}, #{nickname}, #{password}, #{creareTime}, #{roleType})

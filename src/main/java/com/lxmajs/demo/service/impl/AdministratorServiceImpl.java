@@ -5,6 +5,7 @@ import com.lxmajs.demo.entity.Administrator;
 import com.lxmajs.demo.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
 
 public class AdministratorServiceImpl implements AdministratorService {
@@ -33,14 +34,59 @@ public class AdministratorServiceImpl implements AdministratorService {
         return administratorDao.queryAdministratorById(administratorId);
     }
 
+    /**
+     * 根据用户名获得单个管理员的信息
+     * @param administratorUsername
+     * @return
+     */
+    @Override
+    public Administrator getAdministratorByUsername(String administratorUsername) {
+        return administratorDao.queryAdministratorByUsername(administratorUsername);
+    }
+
     @Override
     public boolean addAdministrator(Administrator administrator) {
-        return false;
+        // 业务判断
+        if(administrator.getUsername() != null && !"".equals(administrator.getUsername())
+                && (administrator.getNickname() != null && !"".equals(administrator.getNickname()))
+                && (administrator.getPassword() != null && !"".equals(administrator.getPassword()))
+                && (administrator.getRoleType() >= Administrator.ERoleType.DefaultRolt.getCode())) {
+            // 设置开始时间
+            administrator.setCreateTime(new Date());
+            try {
+                int effectedNum = administratorDao.insertAdministrator(administrator);
+                if(effectedNum > 0)
+                    return true;
+                else
+                    throw new RuntimeException("团加管理员异常！");
+
+            } catch (Exception e) {
+                throw new RuntimeException("添加管理员失败：" + e.getMessage());
+            }
+        }
+
+        // else
+        throw new RuntimeException("管理员信息不完整！");
     }
 
     @Override
     public boolean modifyAdministrator(Administrator administrator) {
-        return false;
+        // 业务判断
+        if(isFill(administrator)) {
+            try {
+                int effectedNum = administratorDao.updateAdministrator(administrator);
+                if(effectedNum > 0)
+                    return true;
+                else
+                    throw new RuntimeException("更新管理员异常！");
+
+            } catch (Exception e) {
+                throw new RuntimeException("更新管理员失败：" + e.getMessage());
+            }
+        }
+
+        // else
+        throw new RuntimeException("管理员信息不完整！");
     }
 
     /**
@@ -65,5 +111,19 @@ public class AdministratorServiceImpl implements AdministratorService {
 
         // else
         throw new RuntimeException("未找到对应的管理员");
+    }
+
+    /**
+     * 判断管理员信息是否完整
+     * @param administrator
+     * @return
+     */
+    public boolean isFill(Administrator administrator){
+        boolean fill = administrator.getUsername() != null && !"".equals(administrator.getUsername())
+                && (administrator.getNickname() != null && !"".equals(administrator.getNickname()))
+                && (administrator.getPassword() != null && !"".equals(administrator.getPassword()))
+                && (administrator.getRoleType() >= Administrator.ERoleType.DefaultRolt.getCode());
+
+        return fill;
     }
 }
