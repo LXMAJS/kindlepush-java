@@ -3,6 +3,7 @@ package com.lxmajs.demo.web;
 import com.lxmajs.demo.entity.Book;
 import com.lxmajs.demo.model.JsonResult;
 import com.lxmajs.demo.service.BookService;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,8 @@ public class BookController {
     @RequestMapping(value = "getbyid", method = RequestMethod.GET)
     private JsonResult getById(Integer bookId){
         Book book = bookService.getBookById(bookId);
+        if(book == null)
+            return JsonResult.error("找不到此书");
         return JsonResult.ok(book);
     }
 

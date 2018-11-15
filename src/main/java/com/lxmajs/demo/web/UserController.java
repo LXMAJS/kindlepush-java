@@ -1,5 +1,6 @@
 package com.lxmajs.demo.web;
 
+import com.lxmajs.demo.model.JsonResult;
 import com.lxmajs.demo.model.WXSessionModel;
 import com.lxmajs.demo.util.HttpClientUtil;
 import com.lxmajs.demo.util.JsonUtil;
@@ -29,17 +30,13 @@ public class UserController {
 
     @Value("${wx.miniprogram.secret}")
     private String wxMiniprogramSecret;
-    
+
     /**
      * 微信用户登录
      * @return
      */
     @RequestMapping(value = "wxlogin", method = RequestMethod.POST)
-    private Map<String, Object> wxLogin(String code){
-        Map<String, Object> modelMap = new HashMap<String, Object>();
-        System.out.print("wx-code: " +code);
-        modelMap.put("success", true);
-        modelMap.put("code", code);
+    private JsonResult wxLogin(String code){
 
         Map<String, String> param = new HashMap<String, String>();
         param.put("appId", wxMiniprogramAppId);
@@ -49,6 +46,7 @@ public class UserController {
 
         // 发起远程请求微信付武器的接口，获取登录的sessionkey
         String wxResult = HttpClientUtil.post(wxMiniprogramLoginUrl, param);
+        System.out.print(wxResult);
         WXSessionModel model = JsonUtil.jsonToPojo(wxResult, WXSessionModel.class);
 
         // 将session存入redis中
@@ -57,8 +55,19 @@ public class UserController {
         long redisTimeout = 1000 * 60 * 30;
         redisOperator.set(redisKey, redisValue, redisTimeout);
 
-        modelMap.put("session_key", redisOperator.get(redisKey));
 
-        return modelMap;
+        return JsonResult.ok();
+    }
+
+    /**
+     * 后台管理员登录
+     * @param username
+     * @param password
+     * @return
+     */
+    @RequestMapping(value = "adminlogin", method = RequestMethod.POST)
+    private JsonResult adminLogin(String username, String password){
+
+        return JsonResult.ok();
     }
 }
