@@ -11,6 +11,7 @@ import com.lxmajs.demo.util.RedisOperator;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,7 +53,7 @@ public class AdminController {
      * @return
      */
     @RequestMapping(value = "addadmin", method = RequestMethod.POST)
-    private JsonResult addAdmin(Administrator admin){
+    private JsonResult addAdmin(@RequestBody Administrator admin){
         if(!administratorServiceImpl.isFill(admin))
             return JsonResult.error("请补充必要信息");
 

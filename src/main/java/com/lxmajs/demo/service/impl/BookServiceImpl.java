@@ -42,6 +42,14 @@ public class BookServiceImpl implements BookService {
 
     /**
      *
+     * @param authorId
+     * @return
+     */
+    @Override
+    public Book queryBookByAuthorId(int authorId) { return bookDao.queryBookByAuthorId(authorId);}
+
+    /**
+     *
      * @param book
      * @return
      */

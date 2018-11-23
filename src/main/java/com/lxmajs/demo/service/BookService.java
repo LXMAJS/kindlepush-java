@@ -21,6 +21,13 @@ public interface BookService {
 
     /**
      *
+     * @param authorId
+     * @return
+     */
+    Book queryBookByAuthorId(int authorId);
+
+    /**
+     *
      * @param book
      * @return
      */

@@ -6,21 +6,28 @@
 <mapper namespace="com.lxmajs.demo.dao.BookDao">
 
     <select id="queryBook" resultType="com.lxmajs.demo.entity.Book">
-        SELECT id, title, price, create_time, lastedit_time
+        SELECT id, title, price, avatar_src, author_id, create_time, lastedit_time
         FROM books
         ORDER BY id
         DESC
     </select>
 
     <select id="queryBookById" resultType="com.lxmajs.demo.entity.Book">
-        SELECT id, title, price, create_time, lastedit_time
+        SELECT id, title, price, avatar_src, author_id, create_time, lastedit_time
         FROM books
         WHERE id = #{bookId}
     </select>
 
+
+    <select id="queryBookByAuthorId" resultType="com.lxmajs.demo.entity.Book">
+        SELECT id, title, price, avatar_src, author_id, create_time, lastedit_time
+        FROM books
+        WHERE id = #{authorId}
+    </select>
+
     <insert id="insertBook" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.lxmajs.demo.entity.Book">
-        INSERT INTO books(title, price, create_time, lastedit_time)
-        VALUES (#{title}, #{price}, #{createTime}, #{lastEditTime})
+        INSERT INTO books(title, price, avatar_src, author_id, create_time, lastedit_time)
+        VALUES (#{title}, #{price}, #{avatar_src}, #{author_id}, #{createTime}, #{lastEditTime})
     </insert>
 
     <update id="updateBook" parameterType="com.lxmajs.demo.entity.Book">
@@ -28,6 +35,8 @@
         <set>
             <if test="title!=null">title=#{title},</if>
             <if test="price!=null">price=#{price},</if>
+            <if test="avatar_src!=null">avatar_src=#{avatar_src},</if>
+            <if test="author_id!=null">author_id=#{author_id},</if>
             <if test="price!=null">lastedit_time=#{lastEditTime}</if>
         </set>
         WHERE id = #{id}

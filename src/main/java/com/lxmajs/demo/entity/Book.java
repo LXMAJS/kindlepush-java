@@ -31,6 +31,22 @@ public class Book {
         this.price = price;
     }
 
+    public int getAuthor_id() {
+        return Author_id;
+    }
+
+    public void setAuthor_id(int author_id) {
+        Author_id = author_id;
+    }
+
+    public String getAvatar_src() {
+        return Avatar_src;
+    }
+
+    public void setAvatar_src(String avatar_src) {
+        Avatar_src = avatar_src;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -62,6 +78,16 @@ public class Book {
      */
     @JsonInclude(JsonInclude.Include.NON_NULL )
     private Float price;
+
+    /**
+     * 作者id
+     */
+    private int Author_id;
+
+    /**
+     * 书籍封面
+     */
+    private String Avatar_src;
 
     /**
      *

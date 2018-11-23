@@ -28,7 +28,10 @@ public class BookController {
     @RequestMapping(value = "list", method = RequestMethod.GET)
     private JsonResult bookList(){
         List<Book> list = bookService.getBookList();
-        return JsonResult.ok(list);
+        Map<String, Object> data = new HashMap<>();
+        data.put("list", list);
+        data.put("curpath", System.getProperties());
+        return JsonResult.ok(data);
     }
 
     /**

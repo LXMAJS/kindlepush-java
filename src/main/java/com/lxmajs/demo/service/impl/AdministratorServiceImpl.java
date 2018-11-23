@@ -4,10 +4,12 @@ import com.lxmajs.demo.dao.AdministratorDao;
 import com.lxmajs.demo.entity.Administrator;
 import com.lxmajs.demo.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class AdministratorServiceImpl implements AdministratorService {
     /**
      * 数据库操作类
