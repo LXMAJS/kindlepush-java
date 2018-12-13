@@ -19,12 +19,6 @@ import java.util.List;
 public class MailService {
 
     /**
-     * 配置文件中的发送人
-     */
-    @Value("${spring.mail.username}")
-    private String from;
-
-    /**
      * 邮件发送帮助类
      */
     @Autowired
@@ -41,7 +35,7 @@ public class MailService {
      * @param subject
      * @param content
      */
-    public void sendSimpleMail(String to, String subject, String content){
+    public void sendSimpleMail(String from, String to, String subject, String content){
         // 设置邮件主题、接收人、邮件内容等参数
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
@@ -59,7 +53,7 @@ public class MailService {
      * @param htmlContent
      * @throws MessagingException
      */
-    public void sendHtmlMail(String to, String subject, String htmlContent) throws MessagingException {
+    public void sendHtmlMail(String from, String to, String subject, String htmlContent) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -80,7 +74,7 @@ public class MailService {
      * @param filePath
      * @throws MessagingException
      */
-    public void sendAttachmentMail(String to, String subject, String content, String filePath) throws MessagingException {
+    public void sendAttachmentMail(String from, String to, String subject, String content, String filePath) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -104,7 +98,7 @@ public class MailService {
      * @param filePaths
      * @throws MessagingException
      */
-    public void sendAttachmentsMail(String to, String subject, String content, List<String> filePaths) throws MessagingException {
+    public void sendAttachmentsMail(String from, String to, String subject, String content, List<String> filePaths) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -133,7 +127,7 @@ public class MailService {
      * @param rscPath
      * @param rscPath
      */
-    public void sendInlineResourceMail(String to, String subject, String content, String rscPath, String rscId) throws MessagingException {
+    public void sendInlineResourceMail(String from, String to, String subject, String content, String rscPath, String rscId) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = null;
 
