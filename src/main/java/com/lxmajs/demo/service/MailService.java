@@ -148,4 +148,7 @@ public class MailService {
             logger.error("发送模板邮件异常：" + e.getMessage());
         }
     }
+
+    public void sendSimpleMail(String to, String hello_world, String s) {
+    }
 }
