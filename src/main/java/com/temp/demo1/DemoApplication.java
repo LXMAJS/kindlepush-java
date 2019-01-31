@@ -1,10 +1,11 @@
 package com.temp.demo1;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class DemoApplication {
-    public static void main ( String[] args ) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+    public static void main ( String[] args ) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
         // 类加载
         Class rc = Class.forName ( "com.temp.demo1.Robot" );
         // 类实例化
@@ -27,6 +28,10 @@ public class DemoApplication {
 
 
         // 尝试获得域
+        Field name = rc.getDeclaredField ( "name" );
+        name.setAccessible ( true );
+        name.set ( r, "LXMAJS" );
+        getHi.invoke ( r, "Hello" );
 
 
     }
