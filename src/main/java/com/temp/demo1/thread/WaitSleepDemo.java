@@ -48,6 +48,8 @@ public class WaitSleepDemo {
 
                         // 唤醒沉睡的A线程
                         lock.notify ();
+                        // 使用notifyAll也可以唤醒
+                        //lock.notifyAll ();
                     } catch (InterruptedException e) {
                         e.printStackTrace ();
                     }
