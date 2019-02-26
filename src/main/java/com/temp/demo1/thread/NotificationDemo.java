@@ -8,11 +8,11 @@ public class NotificationDemo {
     private volatile boolean go = false;
 
 
-    public static void main ( String[] args ) {
+    public static void main ( String[] args ) throws InterruptedException {
         final NotificationDemo test = new NotificationDemo ();
 
         /**
-         * 
+         *
          */
         Runnable waitTask = new Runnable () {
             @Override
@@ -23,7 +23,7 @@ public class NotificationDemo {
                     e.printStackTrace ();
                 }
                 System.out.println (Thread.currentThread ().getName () +
-                        "");
+                        "Finished execution");
             }
         };
 
@@ -35,7 +35,7 @@ public class NotificationDemo {
             public void run () {
                 test.go ();
                 System.out.println (Thread.currentThread ().getName () +
-                        "");
+                        "Finished execution");
             }
         };
 
@@ -45,6 +45,18 @@ public class NotificationDemo {
         Thread t1 = new Thread ( waitTask, "WT1" );
         Thread t2 = new Thread ( waitTask, "WT2" );
         Thread t3 = new Thread ( waitTask, "WT3" );
+        Thread t4 = new Thread ( notifyTask, "NT4" );
+
+        // start all waiting task
+        t1.start ();
+        t2.start ();
+        t3.start ();
+
+        // pause to ensure all waiting thread started successfully
+        Thread.sleep ( 200 );
+
+        // start notify thread
+        t4.start ();
     }
 
     /**
