@@ -23,7 +23,7 @@ public class NotificationDemo {
                     e.printStackTrace ();
                 }
                 System.out.println (Thread.currentThread ().getName () +
-                        "Finished execution");
+                        " Finished execution。");
             }
         };
 
@@ -35,7 +35,7 @@ public class NotificationDemo {
             public void run () {
                 test.go ();
                 System.out.println (Thread.currentThread ().getName () +
-                        "Finished execution");
+                        " Finished execution.");
             }
         };
 
@@ -80,7 +80,7 @@ public class NotificationDemo {
     private synchronized void go(){
         while (go == false){
             System.out.println (Thread.currentThread ().getName () +
-                    "is going to notify all or one thread waiting on ");
+                    " is going to notify all or one thread waiting on ");
             go = true;
             notify ();
             // notifyAll ();
