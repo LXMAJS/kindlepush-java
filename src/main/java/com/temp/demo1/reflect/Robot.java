@@ -1,4 +1,4 @@
-package com.temp.demo1;
+package com.temp.demo1.reflect;
 
 public class Robot {
 
@@ -22,5 +22,12 @@ public class Robot {
      */
     private String throwHello(String tag){
         return "Hello " + tag;
+    }
+
+    /**
+     * 静态代码段
+     */
+    static {
+        System.out.println ("Hello Robot");
     }
 }

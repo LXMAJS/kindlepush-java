@@ -1,4 +1,4 @@
-package com.temp.demo1;
+package com.temp.demo1.reflect;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 public class DemoApplication {
     public static void main ( String[] args ) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
 //        // 类加载
-//        Class rc = Class.forName ( "com.temp.demo1.Robot" );
+//        Class rc = Class.forName ( "com.temp.demo1.reflect.Robot" );
 //        // 类实例化
 //        Robot r = (Robot)rc.newInstance ();
 //
