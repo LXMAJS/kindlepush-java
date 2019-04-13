@@ -2,7 +2,9 @@ package com.lxmajs.library.service.impl;
 
 import com.lxmajs.library.entity.User;
 import com.lxmajs.library.service.UserService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     @Override
