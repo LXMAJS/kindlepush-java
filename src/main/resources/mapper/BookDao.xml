@@ -3,34 +3,34 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.lxmajs.demo.dao.BookDao">
+<mapper namespace="com.lxmajs.library.dao.BookDao">
 
-    <select id="queryBook" resultType="com.lxmajs.demo.entity.Book">
+    <select id="queryBook" resultType="com.lxmajs.library.entity.Book">
         SELECT id, title, price, avatar_src, author_id, create_time, lastedit_time
         FROM books
         ORDER BY id
         DESC
     </select>
 
-    <select id="queryBookById" resultType="com.lxmajs.demo.entity.Book">
+    <select id="queryBookById" resultType="com.lxmajs.library.entity.Book">
         SELECT id, title, price, avatar_src, author_id, create_time, lastedit_time
         FROM books
         WHERE id = #{bookId}
     </select>
 
 
-    <select id="queryBookByAuthorId" resultType="com.lxmajs.demo.entity.Book">
+    <select id="queryBookByAuthorId" resultType="com.lxmajs.library.entity.Book">
         SELECT id, title, price, avatar_src, author_id, create_time, lastedit_time
         FROM books
         WHERE id = #{authorId}
     </select>
 
-    <insert id="insertBook" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.lxmajs.demo.entity.Book">
+    <insert id="insertBook" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.lxmajs.library.entity.Book">
         INSERT INTO books(title, price, avatar_src, author_id, create_time, lastedit_time)
         VALUES (#{title}, #{price}, #{avatar_src}, #{author_id}, #{createTime}, #{lastEditTime})
     </insert>
 
-    <update id="updateBook" parameterType="com.lxmajs.demo.entity.Book">
+    <update id="updateBook" parameterType="com.lxmajs.library.entity.Book">
         UPDATE books
         <set>
             <if test="title!=null">title=#{title},</if>
