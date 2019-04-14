@@ -3,6 +3,7 @@ package com.lxmajs.library.web;
 import com.lxmajs.library.entity.Administrator;
 import com.lxmajs.library.model.JsonResult;
 import com.lxmajs.library.service.impl.AdministratorServiceImpl;
+import com.lxmajs.library.web.RequestEntity.AdminUser;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,25 +18,24 @@ public class AdminController {
     @Autowired
     private AdministratorServiceImpl administratorServiceImpl;
 
+
     /**
      * 后台管理员登录
-     * @param username
-     * @param password
+     * @param user
      * @return
      */
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    private JsonResult adminLogin(String username, String password){
-        if(!StringUtils.isBlank(username) && !StringUtils.isBlank(password)){
-            Administrator admin = administratorServiceImpl.getAdministratorByUsername(username);
-            //TODO: 此处需要考虑使用加密算法针对用户名和密码做进一步的处理
-            // 为了方便快速，就指节比较密码是否匹配了，不做进一步的处理了
-            if(!StringUtils.equals(admin.getPassword(), password)){
-                return JsonResult.error("密码不正确！");
-            } else {
-                return JsonResult.ok();
-            }
-        }
-        return JsonResult.error("请填写完整的用户名和密码");
+    private JsonResult adminLogin(@RequestBody AdminUser user){
+        if(StringUtils.isEmpty (user.getUsername ()) || StringUtils.isEmpty (user.getPassword ()))
+            return JsonResult.error ( "用户名或密码不能为空" );
+
+        Administrator admin = administratorServiceImpl.getAdministratorByUsername ( user.getUsername () );
+        if(admin == null)
+            return JsonResult.error ( "用户不存在" );
+        if(!admin.getPassword ().equals ( user.getPassword () ))
+            return JsonResult.error ( "用户名或密码不正确" );
+
+        return JsonResult.ok (admin);
     }
 
     /**

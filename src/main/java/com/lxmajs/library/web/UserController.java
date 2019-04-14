@@ -1,10 +1,15 @@
 package com.lxmajs.library.web;
 
+import com.lxmajs.library.entity.Administrator;
+import com.lxmajs.library.entity.User;
 import com.lxmajs.library.model.JsonResult;
 import com.lxmajs.library.model.WXSessionModel;
+import com.lxmajs.library.service.AdministratorService;
+import com.lxmajs.library.service.UserService;
 import com.lxmajs.library.util.HttpClientUtil;
 import com.lxmajs.library.util.JsonUtil;
 import com.lxmajs.library.util.RedisOperator;
+import com.lxmajs.library.web.RequestEntity.AdminUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +36,7 @@ public class UserController {
     @Value("${wx.miniprogram.secret}")
     private String wxMiniprogramSecret;
 
+
     /**
      * 微信用户登录
      * @return
@@ -56,17 +62,6 @@ public class UserController {
         redisOperator.set(redisKey, redisValue, redisTimeout);
 
 
-        return JsonResult.ok();
-    }
-
-    /**
-     * 后台管理员登录
-     * @param username
-     * @return
-     */
-    @RequestMapping(value = "adminlogin", method = RequestMethod.POST)
-    private JsonResult adminLogin(@RequestBody String username){
-        System.out.println ("username : " + username);
         return JsonResult.ok();
     }
 }
